@@ -1,0 +1,41 @@
+<!-- carousel -->
+<div class="carousel">
+    <ng-container *ngFor="let movie of moviesList.results; let i = index">
+    <div  class="slide" *ngIf="i === currentSlide" @carouselAnimation>
+        <div class="slide-bg"  >
+            <img  [src]="imagesBaseUrl + 'original' + movie.backdrop_path"
+            [alt]="movie.title" />
+        </div>
+   
+    <div class="slide-pane">
+        <h2 class="title">{{movie.original_title}}</h2>
+        <div class="meta mb-4">
+            <div class="rating mb-1">
+                <i class="pi pi-star-fill"></i>
+                <span>{{movie.vote_average}}</span>
+                <span>/10</span>
+            </div>
+            <div class="votes mb-1">
+                <i class="pi pi-users"></i>
+                <span>{{movie.vote_count}}</span>
+            </div>
+            <div class="release-date">
+                <i class="pi pi-calendar"></i>
+                <span>{{movie.release_date | date : 'yyyy'}}</span>
+            </div>
+        </div>
+        <div class="description">{{movie.overview}}</div>
+     
+    </div>
+ 
+    </div>
+    <!-- controls -->
+    <button class="control prev" (click)="onPreviousClick()">
+        <span class="arrow left"></span>
+    </button>
+    <button class="control next" (click)="onNextClick()">
+        <span class="arrow right"></span>
+    </button>
+    </ng-container>
+
+</div>

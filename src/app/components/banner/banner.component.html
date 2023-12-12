@@ -1,0 +1,12 @@
+<div class="banner container">
+ 
+<div class="grid" >
+    <ng-container *ngFor="let movie of movies.results">
+        <div class="col-2">
+            <app-show-item [movie]="movie"></app-show-item>
+        </div>
+    </ng-container>
+
+</div>
+  
+</div>

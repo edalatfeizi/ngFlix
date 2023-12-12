@@ -1,0 +1,10 @@
+<a class="show-item">
+    <div class="show-item-rating">
+        <i class="pi pi-star"></i>
+        <span>{{movie.vote_average}}/10</span>
+    </div>
+    <div class="show-item-image">
+        <img [src]="imagesBaseUrl + 'original' + movie.backdrop_path" [alt]="movie.title" />
+    </div>
+    <div class="show-item-title">{{movie.title}}</div>
+</a>
