@@ -1,10 +1,11 @@
-<a class="show-item">
+<!--if movie is not null then show it-->
+<a class="show-item" *ngIf="movie"> 
     <div class="show-item-rating">
         <i class="pi pi-star"></i>
-        <span>{{movie.vote_average}}/10</span>
+        <span>{{movie.vote_average}} / 10</span>
     </div>
     <div class="show-item-image">
-        <img [src]="imagesBaseUrl + 'original' + movie.backdrop_path" [alt]="movie.title" />
+        <img [src]="imagesBaseUrl + 'w500' + movie.poster_path" [alt]="movie.title" />
     </div>
-    <div class="show-item-title">{{movie.title}}</div>
+    <div class="show-item-title">{{movie.title || movie.name}}</div>
 </a>

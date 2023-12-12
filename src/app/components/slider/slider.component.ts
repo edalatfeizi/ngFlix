@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { MoviesDto } from '../../models/movie'
+import { Movie } from '../../models/movie'
 import { transition, trigger, useAnimation } from '@angular/animations'
 import { fadeIn, fadeOut } from './slider.animations'
 import { imagesBaseUrl } from '../../constants/image-sizes'
@@ -19,18 +19,23 @@ animations: [
   ]
 })
 export class SliderComponent {
- @Input() moviesList : MoviesDto = {} as MoviesDto
+
+ @Input() moviesList : Movie[] = []
   currentSlide = 0;
   imagesBaseUrl = imagesBaseUrl
+  moviesLen = 0
+
   
+
   onPreviousClick(){
+    
     const previous = this.currentSlide -1;
-    this.currentSlide = previous < 0 ? this.moviesList.results.length - 1 : previous;
+    this.currentSlide = previous < 0 ? this.moviesList.length - 1 : previous;
   }
 
   onNextClick(){
     const next = this.currentSlide +1;
-    this.currentSlide = next === this.moviesList.results.length ? 0 : next;
+    this.currentSlide = next === this.moviesList.length ? 0 : next;
   }
 
 }

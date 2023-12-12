@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShowItemComponent } from '../show-item/show-item.component';
-import { MoviesDto } from '../../models/movie';
-import { MoviesService } from '../../services/movies.service';
+import { Movie } from '../../models/movie';
 
 @Component({
   selector: 'app-banner',
@@ -12,9 +11,9 @@ import { MoviesService } from '../../services/movies.service';
   styleUrl: './banner.component.scss'
 })
 export class BannerComponent {
-constructor(private moviesService: MoviesService){}
+constructor(){}
 
-@Input() movies : MoviesDto = {} as MoviesDto
-upcomingMovies = this.moviesService.getPopularMovies()
+@Input() title : string | null = null
+@Input() movies : Movie[] = []
 
 }

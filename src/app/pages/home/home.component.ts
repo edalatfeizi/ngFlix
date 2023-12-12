@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from '../../components/slider/slider.component';
 import { BannerComponent } from '../../components/banner/banner.component';
 import { MoviesService } from '../../services/movies.service';
-import { MoviesDto } from '../../models/movie';
+import { MovieTypes } from '../../enums/movietypes';
 
 @Component({
   selector: 'app-home',
@@ -12,15 +12,15 @@ import { MoviesDto } from '../../models/movie';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent{
  constructor(private moviesService: MoviesService) {}
- getMovies = this.moviesService.getPopularMovies()
- movies = {} as MoviesDto
+  
+ getPopularMovies$ = this.moviesService.getMoviesByType(MovieTypes.POPULAR,12)
+ getUpcomingMovies$ = this.moviesService.getMoviesByType(MovieTypes.UO_COMING,12)
+ getTopRatedMovies$ = this.moviesService.getMoviesByType(MovieTypes.TOP_RATED,12)
+ 
+ getPopularTvShows$ = this.moviesService.getTvShowsByType(MovieTypes.POPULAR,12)
 
-  ngOnInit(): void {
-    this.getMovies.subscribe(data => {
-      this.movies = data
-    })
-  }
+
 
 }

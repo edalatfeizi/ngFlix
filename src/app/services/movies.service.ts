@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { MoviesDto } from '../models/movie'
 import { TMDBApiKey } from '../constants/ApiKeys'
+import { MovieTypes } from '../enums/movietypes'
+import { map } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -9,14 +11,18 @@ import { TMDBApiKey } from '../constants/ApiKeys'
 export class MoviesService {
   constructor(private httpClient: HttpClient) {}
     private apiUrl = "https://api.themoviedb.org/3"
-    
-    getPopularMovies() {
-      return this.httpClient.get<MoviesDto>(
-        `${this.apiUrl}/movie/popular?api_key=${TMDBApiKey}`
-      )}
 
-    getUpcomingMovies() {
+    getMoviesByType(movieType : MovieTypes, count = 20){
       return this.httpClient.get<MoviesDto>(
-        `${this.apiUrl}/movie/upcoming?api_key=${TMDBApiKey}`
-      )}
+        `${this.apiUrl}/movie/${movieType}?api_key=${TMDBApiKey}`
+      )
+      .pipe(map((data) => data.results.slice(0,count) ))
+    }
+
+    getTvShowsByType(movieType : MovieTypes, count = 20){
+      return this.httpClient.get<MoviesDto>(
+        `${this.apiUrl}/tv/${movieType}?api_key=${TMDBApiKey}`
+      )
+      .pipe(map((data) => data.results.slice(0,count) ))
+    }
 }

@@ -11,6 +11,6 @@ import { imagesBaseUrl } from '../../constants/image-sizes';
   styleUrl: './show-item.component.scss'
 })
 export class ShowItemComponent {
-@Input() movie : Movie = {} as Movie
+@Input() movie : Movie | null = null;
 imagesBaseUrl = imagesBaseUrl
 }

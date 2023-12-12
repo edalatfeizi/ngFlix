@@ -10,7 +10,8 @@ export type Movie = {
     release_date: string
     title: string
     vote_average: number
-    vote_count: number
+    vote_count: number,
+    name? :string
 }
 
 export type MoviesDto = {

@@ -1,6 +1,6 @@
 <!-- carousel -->
-<div class="carousel">
-    <ng-container *ngFor="let movie of moviesList.results; let i = index">
+<div class="carousel" *ngIf="moviesList">
+    <ng-container *ngFor="let movie of moviesList; let i = index">
     <div  class="slide" *ngIf="i === currentSlide" @carouselAnimation>
         <div class="slide-bg"  >
             <img  [src]="imagesBaseUrl + 'original' + movie.backdrop_path"
