@@ -1,4 +1,5 @@
 # NgFlix
+This project uses [https://www.themoviedb.org/] `api` so you need to first sign up at[https://www.themoviedb.org/] and then get your `api key` and replace it in `movies.service.ts` service to be able to get movies data from the api 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
 
