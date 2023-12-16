@@ -1,5 +1,5 @@
 <!--if movie is not null then show it-->
-<a class="show-item" *ngIf="movie"> 
+<a class="show-item" *ngIf="movie" [title]="movie.title" [routerLink]="['/detail/' + movie.id]"> 
     <div class="show-item-rating">
         <i class="pi pi-star"></i>
         <span>{{movie.vote_average}} / 10</span>
@@ -7,5 +7,5 @@
     <div class="show-item-image">
         <img [src]="imagesBaseUrl + 'w500' + movie.poster_path" [alt]="movie.title" />
     </div>
-    <div class="show-item-title">{{movie.title || movie.name}}</div>
+    <div class="show-item-title">{{movie.title}}</div>
 </a>

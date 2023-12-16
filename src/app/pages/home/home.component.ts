@@ -4,6 +4,8 @@ import { SliderComponent } from '../../components/slider/slider.component';
 import { BannerComponent } from '../../components/banner/banner.component';
 import { MoviesService } from '../../services/movies.service';
 import { MovieTypes } from '../../enums/movietypes';
+import { map } from 'rxjs';
+import { mapToMovies } from '../../models/tvshow';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +22,6 @@ export class HomeComponent{
  getTopRatedMovies$ = this.moviesService.getMoviesByType(MovieTypes.TOP_RATED,12)
  
  getPopularTvShows$ = this.moviesService.getTvShowsByType(MovieTypes.POPULAR,12)
-
-
+ .pipe(map(mapToMovies))
 
 }
