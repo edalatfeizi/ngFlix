@@ -1,9 +1,8 @@
-<div class="banner container" *ngIf="movies">
-<h1 *ngIf="title">{{title}}</h1>
-<div class="grid" >
-        <div class="col-2" *ngFor="let movie of movies">
-            <app-show-item [movie]="movie"></app-show-item>
-        </div>
-</div>
-  
+<div class="banner container" *ngIf="shows">
+  <h1 *ngIf="title">{{ title }}</h1>
+  <div class="grid">
+    <div class="col-2" *ngFor="let show of shows">
+      <app-show-item [movie]="show"></app-show-item>
+    </div>
+  </div>
 </div>

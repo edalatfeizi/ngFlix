@@ -60,13 +60,65 @@
         </div>
       </div>
     </p-tabPanel>
-    <p-tabPanel header="Videos"> </p-tabPanel>
-    <p-tabPanel header="Photos"> </p-tabPanel>
+    <p-tabPanel header="Videos">
+      <ng-container *ngIf="showVideos$ | async as showVideos">
+        <div class="grid">
+          <div class="col-4" *ngFor="let video of showVideos">
+            <app-embed-video [video]="video"></app-embed-video>
+          </div>
+        </div>
+      </ng-container>
+    </p-tabPanel>
+    <p-tabPanel header="Photos">
+      <ng-container *ngIf="showPhotos$ | async as showPhotos">
+        <div class="grid">
+          <div class="col-2" *ngFor="let moviePhoto of showPhotos">
+            <img
+              [src]="imagesSizes.medium + moviePhoto.file_path"
+              [alt]="show.title"
+              class="show-image"
+            />
+            <p-image
+              [src]="imagesSizes.large + moviePhoto.file_path"
+              [alt]="show.title"
+              width="250"
+              [preview]="true"
+            ></p-image>
+          </div>
+        </div>
+      </ng-container>
+    </p-tabPanel>
   </p-tabView>
-  <pre>
-    {{ show | json }}
-</pre
-  >
+  <ng-container *ngIf="showActors$ | async as actors">
+    <p-carousel
+      [value]="actors"
+      [numVisible]="actors.length"
+      [numScroll]="actors.length"
+      [circular]="false"
+    >
+      <ng-template let-actor pTemplate="item">
+        <div class="actor">
+          <img
+            *ngIf="actor.profile_path; else defaultActorPhoto"
+            [src]="imagesSizes + actor.profile_path"
+            [alt]="actor.name"
+          />
+          <div>{{ actor.name }}</div>
+          <div>({{ actor.character }})</div>
+          <p-image
+            [src]="imagesSizes.large + actor.profile_path"
+            [alt]="actor.name"
+            width="250"
+            [preview]="true"
+          ></p-image>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </ng-container>
+  <ng-container *ngIf="similarShows$ | async as similarShows">
+    <app-banner title="Watch Similar" [shows]="similarShows" />
+  </ng-container>
 </ng-container>
-
-<p>Show Id: {{ showId }}</p>
+<ng-template #defaultActorPhoto>
+  <img src="/assets/images/actor.jpg" alt="No Picture" />
+</ng-template>
