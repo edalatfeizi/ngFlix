@@ -62,4 +62,15 @@ export class MoviesService {
       )
       .pipe(map((data) => data.results.slice(0, count)))
   }
+
+  searchMovies(page: number, searchTerm?: string) {
+    const uri = searchTerm
+      ? `search/movie?query=${searchTerm}&`
+      : 'movie/popular?'
+
+    return this.httpClient.get<MoviesDto>(
+      `${this.apiUrl}/${uri}page=${page}&api_key=${TMDBApiKey}`
+    )
+    //.pipe(map((data) => data.results))
+  }
 }
