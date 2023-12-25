@@ -98,25 +98,30 @@
     >
       <ng-template let-actor pTemplate="item">
         <div class="actor">
-          <img
+          <!-- <img
             *ngIf="actor.profile_path; else defaultActorPhoto"
-            [src]="imagesSizes + actor.profile_path"
+            [src]="imagesSizes.medium + actor.profile_path"
             [alt]="actor.name"
-          />
-          <div>{{ actor.name }}</div>
-          <div>({{ actor.character }})</div>
+          /> -->
+
           <p-image
             [src]="imagesSizes.large + actor.profile_path"
             [alt]="actor.name"
             width="250"
             [preview]="true"
           ></p-image>
+          <div>{{ actor.name }}</div>
+          <div>({{ actor.character }})</div>
         </div>
       </ng-template>
     </p-carousel>
   </ng-container>
   <ng-container *ngIf="similarShows$ | async as similarShows">
-    <app-banner title="Watch Similar" [shows]="similarShows" />
+    <app-banner
+      title="Watch Similar"
+      [showType]="showType"
+      [shows]="similarShows"
+    />
   </ng-container>
 </ng-container>
 <ng-template #defaultActorPhoto>

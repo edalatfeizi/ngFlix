@@ -15,4 +15,5 @@ export class BannerComponent {
 
   @Input() title: string | null = null
   @Input() shows: Movie[] = []
+  @Input() showType: string | null = null
 }

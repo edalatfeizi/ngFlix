@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { MoviesService } from '../../services/movies.service'
-import { Observable } from 'rxjs'
+import { Observable, map } from 'rxjs'
 import { MoviesDto } from '../../models/movie'
 import { ShowItemComponent } from '../show-item/show-item.component'
 import { InputTextModule } from 'primeng/inputtext'
 import { PaginatorModule, PaginatorState } from 'primeng/paginator'
 import { FormsModule } from '@angular/forms'
+import { ActivatedRoute } from '@angular/router'
+import { mapToMoviesDto } from '../../models/tvshow'
+import { TvShowsService } from '../../services/tvshows.service'
 
 @Component({
   selector: 'app-show-list',
@@ -22,17 +25,30 @@ import { FormsModule } from '@angular/forms'
   styleUrl: './show-list.component.scss',
 })
 export class ShowsListComponent implements OnInit {
+  listType: 'movie' | 'tv' = 'movie'
   showsList$: Observable<MoviesDto> | null = null
   searchTerm = ''
   page = 1
-  constructor(private moviesService: MoviesService) {}
+  totalPages = 1
+  constructor(
+    private moviesService: MoviesService,
+    private tvShowsService: TvShowsService,
+    private router: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.listType = this.router.snapshot.params['listType']
+
     this.getPagedShows(1)
   }
 
   getPagedShows(page: number, searchTerm?: string) {
-    this.showsList$ = this.moviesService.searchMovies(page, searchTerm)
+    if (this.listType === 'movie')
+      this.showsList$ = this.moviesService.searchMovies(page, searchTerm)
+    else
+      this.showsList$ = this.tvShowsService
+        .searchTvShows(page, searchTerm)
+        .pipe(map(mapToMoviesDto))
   }
 
   search() {

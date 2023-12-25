@@ -27,11 +27,12 @@ export class HomeComponent {
     MovieTypes.UO_COMING,
     12
   )
-  getTopRatedMovies$ = this.tvShowsService
-    .getTvShowsByType(TvShowTypes.POPULAR, 12)
-    .pipe(map(mapToMovies))
+  getTopRatedMovies$ = this.moviesService.getMoviesByType(
+    MovieTypes.TOP_RATED,
+    12
+  )
 
-  getPopularTvShows$ = this.moviesService
-    .getTvShowsByType(MovieTypes.POPULAR, 12)
+  getPopularTvShows$ = this.tvShowsService
+    .getTvShowsByType(TvShowTypes.POPULAR, 12)
     .pipe(map(mapToMovies))
 }

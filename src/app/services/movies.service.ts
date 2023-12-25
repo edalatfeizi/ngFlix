@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Movie, MoviesDto } from '../models/movie'
+import { GenresDto, Movie, MoviesDto } from '../models/movie'
 import { TMDBApiKey } from '../constants/ApiKeys'
 import { MovieTypes } from '../enums/movietypes'
 import { map } from 'rxjs'
@@ -71,6 +71,13 @@ export class MoviesService {
     return this.httpClient.get<MoviesDto>(
       `${this.apiUrl}/${uri}page=${page}&api_key=${TMDBApiKey}`
     )
+
     //.pipe(map((data) => data.results))
+  }
+
+  getMoviesGenres() {
+    return this.httpClient
+      .get<GenresDto>(`${this.apiUrl}/genre/movie/list?api_key=${TMDBApiKey}`)
+      .pipe(map((data) => data.genres))
   }
 }

@@ -50,7 +50,7 @@ export class ShowDetailComponent implements OnInit {
   ngOnInit(): void {
     this.router.params.subscribe((params) => {
       this.showId = params['id']
-      this.showType = params['type']
+      this.showType = params['showType']
 
       if (this.showType === 'movie') {
         this.show$ = this.moviesService.getMovieById(this.showId)
