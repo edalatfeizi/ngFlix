@@ -37,9 +37,10 @@ export class ShowsListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.listType = this.router.snapshot.params['listType']
-
-    this.getPagedShows(1)
+    this.router.params.subscribe((params) => {
+      this.listType = params['listType']
+      this.getPagedShows(1)
+    })
   }
 
   getPagedShows(page: number, searchTerm?: string) {

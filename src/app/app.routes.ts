@@ -10,4 +10,5 @@ export const routes: Routes = [
   //{path: 'detail', loadComponent: ()=> import('../app/pages/show-detail/show-detail.component').then(mod=> mod.ShowDetailComponent)},
   { path: 'detail/:showType/:id', component: ShowDetailComponent },
   { path: 'genres', component: GenresComponent },
+  { path: 'genres/:genreId', component: GenresComponent },
 ]

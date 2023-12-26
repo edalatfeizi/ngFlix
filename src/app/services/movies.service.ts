@@ -80,4 +80,11 @@ export class MoviesService {
       .get<GenresDto>(`${this.apiUrl}/genre/movie/list?api_key=${TMDBApiKey}`)
       .pipe(map((data) => data.genres))
   }
+
+  getMoviesByGenreId(page: number = 1, genreId: string) {
+    return this.httpClient.get<MoviesDto>(
+      `${this.apiUrl}/discover/movie?with_genres=${genreId}&page=${page}&api_key=${TMDBApiKey}`
+    )
+    //.pipe(map((data) => data.results))
+  }
 }
